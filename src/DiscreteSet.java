@@ -1,3 +1,4 @@
+import java.beans.Expression;
 import java.util.ArrayList;
 
 public class DiscreteSet<T> extends Set {
@@ -99,7 +100,13 @@ public class DiscreteSet<T> extends Set {
 
     @Override
     public Set elementsWhere(Condition c) {
-        return null;
+        Set<T> qualifiedSet = new DiscreteSet<T>();
+        for (T element : elements) {
+            if (c.satisfiedBy(element)) {
+                qualifiedSet.add(element);
+            }
+        }
+        return qualifiedSet;
     }
 
     @Override
@@ -108,19 +115,36 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public boolean equals() {
-        return false;
+    public boolean isSubset(Set a) {
+        for (T element : (T[]) a.toArray()) {
+            if (!contains(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean equals(Set a) {
+        return this.isSubset(a) && a.isSubset(this);
     }
 
     @Override
     public boolean existsElementWhere(Condition c) {
-
-        return false;
+        boolean retValue = false;
+        for (T element : elements) {
+            retValue = retValue || c.satisfiedBy(element);
+        }
+        return retValue;
     }
 
     @Override
     public boolean allElementsSatisfy(Condition c) {
-        return false;
+        boolean retValue = true;
+        for (T element : elements) {
+            retValue = retValue && c.satisfiedBy(element);
+        }
+        return retValue;
     }
 
     @Override
@@ -133,8 +157,10 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public void forEach() {
-
+    public void forEach(Iterated expr) {
+        for (T element : elements) {
+            expr.run(element);
+        }
     }
 
     @Override

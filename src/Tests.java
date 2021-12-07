@@ -8,5 +8,8 @@ public class Tests {
         System.out.println(mySet.toString());
         mySet = mySet.differenceWith(new DiscreteSet("glorp", "shmoopy"));
         System.out.println(mySet.toString());
+        mySet.forEach((a) -> {System.out.println(((String)a).length());});
+        System.out.println( mySet.elementsWhere((a) -> {return 5<((String)a).length(); }) );
+
     }
 }
