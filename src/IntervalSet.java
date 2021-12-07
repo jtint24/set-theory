@@ -111,6 +111,10 @@ public class IntervalSet<T> extends Set {
         return false;
     }
 
+    public boolean overlapsWith(IntervalSet a) {
+        return (this.contains(a.minimum) || this.contains(a.maximum));
+    }
+
     @Override
     public boolean equals(Set a) {
         return false;
@@ -144,5 +148,21 @@ public class IntervalSet<T> extends Set {
     @Override
     public void remove(Object e) {
 
+    }
+
+    public String toString() {
+        String runningString = "";
+        if (minInclusive) {
+            runningString+="[";
+        } else {
+            runningString+="(";
+        }
+        runningString+=minimum+" to ";
+        if (maxInclusive) {
+            runningString+="]";
+        } else {
+            runningString+=")";
+        }
+        return runningString;
     }
 }
