@@ -1,5 +1,5 @@
 public abstract class Set<T>  {
-    public abstract int cardinality(Set a);
+    public abstract int cardinality();
     public abstract Set unionWith(Set a);
     public abstract Set intersectionWith(Set a);
     public abstract Set productWith(Set a);

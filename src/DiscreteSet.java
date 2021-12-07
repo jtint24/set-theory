@@ -1,4 +1,3 @@
-import java.beans.Expression;
 import java.util.ArrayList;
 
 public class DiscreteSet<T> extends Set {
@@ -27,7 +26,7 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public int cardinality(Set a) {
+    public int cardinality() {
         return elements.size();
     }
 
