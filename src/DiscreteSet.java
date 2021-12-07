@@ -67,9 +67,9 @@ public class DiscreteSet<T> extends Set {
     public Set differenceWith(Set a) {
         ArrayList<T> newElements = new ArrayList<>();
         if (a instanceof DiscreteSet) {
-            for (Object element : elements) {
-                if (!newElements.contains((T) element) && !a.contains((T) element)) {
-                    newElements.add((T) element);
+            for (T element : elements) {
+                if (!newElements.contains(element) && !a.contains(element)) {
+                    newElements.add(element);
                 }
             }
             return new DiscreteSet(newElements);
@@ -87,9 +87,8 @@ public class DiscreteSet<T> extends Set {
         Set<Set<T>> powerSet = new DiscreteSet();
         for (int i = 0; i<Math.pow(2, elements.size()); i++) {
             ArrayList<T> newElements = new ArrayList<>();
-            for (int j = 1; i<elements.size(); i++) {
-                if (i%Math.pow(2,j)>Math.pow(2,j-1)) {
-                    //System.out.println(elements.get());
+            for (int j = 1; j<=elements.size(); j++) {
+                if (i%Math.pow(2,j)>=Math.pow(2,j-1)) {
                     newElements.add(elements.get(j-1));
                 }
             }
@@ -105,7 +104,7 @@ public class DiscreteSet<T> extends Set {
 
     @Override
     public boolean contains(Object a) {
-        return false;
+        return elements.contains(a);
     }
 
     @Override
@@ -115,6 +114,7 @@ public class DiscreteSet<T> extends Set {
 
     @Override
     public boolean existsElementWhere(Condition c) {
+
         return false;
     }
 
@@ -125,7 +125,11 @@ public class DiscreteSet<T> extends Set {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        T[] retArray = (T[]) new Object[elements.size()];
+        for (int i = 0; i<retArray.length; i++) {
+            retArray[i] = elements.get(i);
+        }
+        return retArray;
     }
 
     @Override
@@ -146,10 +150,14 @@ public class DiscreteSet<T> extends Set {
     }
 
     public String toString() {
-        String retString = "{";
-        for (T element : elements) {
-            retString+=element.toString()+", ";
+        if (elements.size()>0) {
+            String retString = "{";
+            for (int i = 0; i < elements.size() - 1; i++) {
+                retString += elements.get(i).toString() + ", ";
+            }
+            return retString + elements.get(elements.size() - 1) + "}";
+        } else {
+            return "{}";
         }
-        return retString+"}";
     }
 }
