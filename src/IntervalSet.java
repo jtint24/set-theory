@@ -19,6 +19,12 @@ public class IntervalSet<T> extends Set {
 
     @Override
     public Set unionWith(Set a) {
+        if (a instanceof IntervalSet && a.isSubset(this)) {
+            return a;
+        }
+        if (a instanceof IntervalSet && this.isSubset(a)) {
+            return this;
+        }
         if (a instanceof IntervalSet && this.contains(((IntervalSet<?>) a).minimum)) {
             return new IntervalSet(minimum, minInclusive, ((IntervalSet<?>) a).maximum, ((IntervalSet<?>) a).maxInclusive);
         }
@@ -30,16 +36,23 @@ public class IntervalSet<T> extends Set {
 
     @Override
     public Set intersectionWith(Set a) {
+        if (a instanceof IntervalSet && a.isSubset(this)) {
+            return this;
+        }
+        if (a instanceof IntervalSet && this.isSubset(a)) {
+            return a;
+        }
         if (a instanceof IntervalSet && (this.contains(((IntervalSet<?>) a).minimum) || this.contains(((IntervalSet<?>) a).maximum))) {
             double largestMin = minimum>((IntervalSet<?>) a).minimum ? minimum : ((IntervalSet<?>) a).minimum;
-            double smallestMax = maximum>((IntervalSet<?>) a).minimum ? maximum : ((IntervalSet<?>) a).maximum;
+            double smallestMax = maximum<((IntervalSet<?>) a).minimum ? maximum : ((IntervalSet<?>) a).maximum;
             boolean largestMinInclusive = minimum>((IntervalSet<?>) a).minimum ? minInclusive : ((IntervalSet<?>) a).minInclusive;
-            boolean smallestMaxInclusive = maximum>((IntervalSet<?>) a).maximum ? maxInclusive : ((IntervalSet<?>) a).maxInclusive;
+            boolean smallestMaxInclusive = maximum<((IntervalSet<?>) a).maximum ? maxInclusive : ((IntervalSet<?>) a).maxInclusive;
             if (minimum == ((IntervalSet<?>) a).minimum) {
                 largestMinInclusive = minInclusive && ((IntervalSet<?>) a).minInclusive;
             }
             if (maximum == ((IntervalSet<?>) a).maximum) {
                 smallestMaxInclusive = maxInclusive && ((IntervalSet<?>) a).maxInclusive;
+                System.out.println(smallestMaxInclusive);
             }
             return new IntervalSet(largestMin, largestMinInclusive, smallestMax, smallestMaxInclusive);
         }
@@ -108,6 +121,17 @@ public class IntervalSet<T> extends Set {
 
     @Override
     public boolean isSubset(Set a) {
+        if (a instanceof IntervalSet) {
+            boolean hasSmallerMin = minimum<((IntervalSet<?>) a).minimum;
+            if (((IntervalSet<?>) a).minimum==minimum && !((IntervalSet<?>) a).minInclusive==minInclusive) {
+                hasSmallerMin = true;
+            }
+            boolean hasLargerMax = maximum>((IntervalSet<?>) a).maximum;
+            if (((IntervalSet<?>) a).maximum==maximum && !((IntervalSet<?>) a).maxInclusive==maxInclusive) {
+                hasLargerMax = true;
+            }
+            return hasLargerMax && hasSmallerMin;
+        }
         return false;
     }
 
@@ -157,7 +181,7 @@ public class IntervalSet<T> extends Set {
         } else {
             runningString+="(";
         }
-        runningString+=minimum+" to ";
+        runningString+=minimum+" to "+maximum;
         if (maxInclusive) {
             runningString+="]";
         } else {

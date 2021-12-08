@@ -1,15 +1,10 @@
 public class Tests {
     public static void main(String[] args) {
-        Set mySet = new DiscreteSet("Hello", "goodbye", "howdy", "Hello", "bolon", "glorp");
-        System.out.println(mySet);
-        mySet = mySet.unionWith(new DiscreteSet("welcome", "Hello", "howdy"));
+        Set mySet = new IntervalSet(1,true,10, true);
         System.out.println(mySet.toString());
-        mySet = mySet.intersectionWith(new DiscreteSet("Hello", "goodbye", "howdy", "glorp", "snop", "welcome"));
+        mySet = mySet.intersectionWith(new IntervalSet(1, false, 10, false));
         System.out.println(mySet.toString());
-        mySet = mySet.differenceWith(new DiscreteSet("glorp", "shmoopy"));
+        mySet = mySet.intersectionWith(new IntervalSet(0.5, false, 5, true));
         System.out.println(mySet.toString());
-        mySet.forEach((a) -> {System.out.println(((String)a).length());});
-        System.out.println( mySet.elementsWhere((a) -> {return 5<((String)a).length(); }) );
-
     }
 }
