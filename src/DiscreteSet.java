@@ -114,11 +114,6 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public boolean equals(Set a) {
-        return this.isSubset(a) && a.isSubset(this);
-    }
-
-    @Override
     public boolean existsElementWhere(Condition c) {
         boolean retValue = false;
         for (T element : elements) {

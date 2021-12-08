@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Complement<T> extends Set {
     private Set complemented;
 
@@ -7,27 +9,48 @@ public class Complement<T> extends Set {
 
     @Override
     public int cardinality() {
-        return 0;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public Set unionWith(Set a) {
-        return null;
+        ArrayList<T> newComplemented = new ArrayList<>();
+        for (Object antielement : complemented.toArray()) {
+            if (!a.contains(antielement)) {
+                newComplemented.add((T)antielement);
+            }
+        }
+        return new Complement(new DiscreteSet(newComplemented));
     }
 
     @Override
     public Set intersectionWith(Set a) {
-        return null;
+        ArrayList<T> aElements = new ArrayList<>();
+        for (Object aElement : a.toArray()) {
+            if (contains(aElement)) {
+                aElements.add((T) aElement);
+            }
+        }
+        return new DiscreteSet(aElements);
     }
 
     @Override
     public Set differenceWith(Set a) {
-        return null;
+        ArrayList<T> aElements = new ArrayList<>();
+        for (Object aElement : a.toArray()) {
+            aElements.add((T) aElement);
+        }
+        for (Object antiElement : complemented.toArray()) {
+            if (!aElements.contains(antiElement)) {
+                aElements.add((T) antiElement);
+            }
+        }
+        return new Complement(new DiscreteSet(aElements));
     }
 
     @Override
     public Set powerSet() {
-        return null;
+        throw new RuntimeException("can't get power set of an indiscrete set!");
     }
 
     @Override
@@ -37,12 +60,17 @@ public class Complement<T> extends Set {
 
     @Override
     public boolean contains(Object e) {
-        return false;
+        return !complemented.contains(e);
     }
 
     @Override
     public boolean isSubset(Set a) {
-        return false;
+        for (Object element : a.toArray()) {
+            if (!contains(element)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -57,7 +85,7 @@ public class Complement<T> extends Set {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        throw new RuntimeException("can't get an array of an indiscrete set!");
     }
 
     @Override
