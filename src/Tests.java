@@ -2,15 +2,17 @@ import java.util.ArrayList;
 
 public class Tests {
     public static void main(String[] args) {
-        Set domain = new DiscreteSet<String>("hello", "goodbye", "welcome");
-        Set range = new DiscreteSet<Integer>(1, 2, 3);
-        Set product = domain.productWith(range);
-
-        System.out.println(product.toString());
-
-        Set mySet = new DiscreteSet<OrderedPair>(new OrderedPair<String, Integer>("goodbye", 2));
-
-        System.out.println(product.contains(new OrderedPair<String, Integer>("hello", 2)));
-        System.out.println(product.differenceWith(mySet).toString());
+        Set complemented = new DiscreteSet<String>("hello", "goodbye", "welcome");
+        Set myComplement = new Complement(complemented);
+        System.out.println("contains hello "+ myComplement.contains("hello"));
+        System.out.println("contains rufus "+ myComplement.contains("rufus"));
+        Set otherSet = new DiscreteSet("this thing", "hello", "not me");
+        myComplement = myComplement.unionWith(otherSet);
+        System.out.println("union performed ");
+        System.out.println("contains hello "+myComplement.contains("hello"));
+        System.out.println("toString "+myComplement.toString());
+        myComplement = myComplement.differenceWith(new DiscreteSet("rufus","hello","melow","welcome"));
+        System.out.println("difference performed");
+        System.out.println("toString: "+myComplement.toString());
     }
 }

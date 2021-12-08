@@ -92,4 +92,8 @@ public class Complement<T> extends Set {
     public boolean isDiscrete() {
         return false;
     }
+
+    public String toString() {
+        return "complement:"+complemented.toString();
+    }
 }

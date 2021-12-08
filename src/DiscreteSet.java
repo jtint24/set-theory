@@ -145,12 +145,6 @@ public class DiscreteSet<T> extends Set {
         return true;
     }
 
-    public void forEach(Iterated expr) {
-        for (T element : elements) {
-            expr.run(element);
-        }
-    }
-
     public void add(Object e) {
         if (!elements.contains(e)) {
             elements.add((T) e);
