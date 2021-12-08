@@ -59,4 +59,9 @@ public class Complement<T> extends Set {
     public Object[] toArray() {
         return new Object[0];
     }
+
+    @Override
+    public boolean isDiscrete() {
+        return false;
+    }
 }

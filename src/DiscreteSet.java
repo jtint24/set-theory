@@ -59,11 +59,6 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public Set productWith(Set a) {
-        return null;
-    }
-
-    @Override
     public Set differenceWith(Set a) {
         ArrayList<T> newElements = new ArrayList<>();
         if (a instanceof DiscreteSet) {
@@ -105,7 +100,7 @@ public class DiscreteSet<T> extends Set {
 
     @Override
     public boolean contains(Object a) {
-        return elements.contains(a);
+        return elements.contains((T) a);
     }
 
     @Override
@@ -148,6 +143,11 @@ public class DiscreteSet<T> extends Set {
             retArray[i] = elements.get(i);
         }
         return retArray;
+    }
+
+    @Override
+    public boolean isDiscrete() {
+        return true;
     }
 
     public void forEach(Iterated expr) {

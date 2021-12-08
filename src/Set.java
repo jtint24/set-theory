@@ -1,9 +1,21 @@
+import java.util.ArrayList;
+
 public abstract class Set<T>  {
     public abstract int cardinality();
     public abstract Set unionWith(Set a);
     public abstract Set intersectionWith(Set a);
     public Set productWith(Set a) {
-        return new Product(this, a);
+        if (isDiscrete()) {
+            ArrayList<OrderedPair> prodSetElements = new ArrayList<>();
+            for (T multiplicand : this.toArray()) {
+                for (Object multiplier : a.toArray()) {
+                    prodSetElements.add(new OrderedPair(multiplicand, multiplier));
+                }
+            }
+            return (Set) (new DiscreteSet<OrderedPair>(prodSetElements));
+        } else {
+            throw new RuntimeException("cannot find product of nondiscrete set!");
+        }
     }
     public abstract Set differenceWith(Set a);
     public Set complement() {
@@ -19,4 +31,5 @@ public abstract class Set<T>  {
     public abstract boolean existsElementWhere(Condition c);
     public abstract boolean allElementsSatisfy(Condition c);
     public abstract T[] toArray();
+    public abstract boolean isDiscrete();
 }
