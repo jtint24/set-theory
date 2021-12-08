@@ -78,11 +78,6 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public Set complement() {
-        return null;
-    }
-
-    @Override
     public Set powerSet() {
         Set<Set<T>> powerSet = new DiscreteSet();
         for (int i = 0; i<Math.pow(2, elements.size()); i++) {
@@ -92,7 +87,7 @@ public class DiscreteSet<T> extends Set {
                     newElements.add(elements.get(j-1));
                 }
             }
-            powerSet.add(new DiscreteSet(newElements));
+            ((DiscreteSet)powerSet).add(new DiscreteSet(newElements));
         }
         return powerSet;
     }
@@ -102,7 +97,7 @@ public class DiscreteSet<T> extends Set {
         Set<T> qualifiedSet = new DiscreteSet<T>();
         for (T element : elements) {
             if (c.satisfiedBy(element)) {
-                qualifiedSet.add(element);
+                ((DiscreteSet)qualifiedSet).add(element);
             }
         }
         return qualifiedSet;
@@ -155,21 +150,18 @@ public class DiscreteSet<T> extends Set {
         return retArray;
     }
 
-    @Override
     public void forEach(Iterated expr) {
         for (T element : elements) {
             expr.run(element);
         }
     }
 
-    @Override
     public void add(Object e) {
         if (!elements.contains(e)) {
             elements.add((T) e);
         }
     }
 
-    @Override
     public void remove(Object e) {
         elements.remove((T) e);
     }
