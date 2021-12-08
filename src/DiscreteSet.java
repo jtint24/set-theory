@@ -33,43 +33,46 @@ public class DiscreteSet<T> extends Set {
     @Override
     public Set unionWith(Set a) {
         ArrayList<T> newElements = elements;
-        if (a instanceof DiscreteSet) {
+        if (a.isDiscrete()) {
             for (Object element : a.toArray()) {
                 if (!newElements.contains((T)element)) {
                     newElements.add((T) element);
                 }
             }
             return new DiscreteSet(newElements);
+        } else {
+            return a.unionWith(this);
         }
-        return null;
     }
 
     @Override
     public Set intersectionWith(Set a) {
         ArrayList<T> newElements = new ArrayList<>();
-        if (a instanceof DiscreteSet) {
+        if (a.isDiscrete()) {
             for (Object element : a.toArray()) {
                 if (!newElements.contains((T) element) && elements.contains((T) element)) {
                     newElements.add((T) element);
                 }
             }
             return new DiscreteSet(newElements);
+        } else {
+            return a.intersectionWith(this);
         }
-        return null;
     }
 
     @Override
     public Set differenceWith(Set a) {
         ArrayList<T> newElements = new ArrayList<>();
-        if (a instanceof DiscreteSet) {
+        if (a.isDiscrete()) {
             for (T element : elements) {
                 if (!newElements.contains(element) && !a.contains(element)) {
                     newElements.add(element);
                 }
             }
             return new DiscreteSet(newElements);
+        } else {
+            return this.differenceWith(a.intersectionWith(this));
         }
-        return null;
     }
 
     @Override
