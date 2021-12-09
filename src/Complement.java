@@ -74,7 +74,7 @@ public class Complement<T> extends Set {
     }
 
     @Override
-    public boolean existsElementWhere(Condition c) {
+    public boolean existsElementSatisfying(Condition c) {
         return false;
     }
 
@@ -85,7 +85,7 @@ public class Complement<T> extends Set {
 
     @Override
     public Object[] toArray() {
-        throw new RuntimeException("can't get an array of an indiscrete set!");
+        throw new RuntimeException("can't get an array of an non-discrete set!");
     }
 
     @Override

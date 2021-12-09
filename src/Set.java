@@ -25,10 +25,11 @@ public abstract class Set<T>  {
     public abstract Set elementsWhere(Condition c);
     public abstract boolean contains(T e);
     public abstract boolean isSubset(Set a);
-    public boolean equals(Set a) {
-        return a.isSubset(this) && this.isSubset(a);
+    @Override
+    public boolean equals(Object a) {
+        return ((Set)a).isSubset(this) && this.isSubset((Set)a);
     };
-    public abstract boolean existsElementWhere(Condition c);
+    public abstract boolean existsElementSatisfying(Condition c);
     public abstract boolean allElementsSatisfy(Condition c);
     public abstract T[] toArray();
     public abstract boolean isDiscrete();

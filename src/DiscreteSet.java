@@ -117,7 +117,7 @@ public class DiscreteSet<T> extends Set {
     }
 
     @Override
-    public boolean existsElementWhere(Condition c) {
+    public boolean existsElementSatisfying(Condition c) {
         boolean retValue = false;
         for (T element : elements) {
             retValue = retValue || c.satisfiedBy(element);

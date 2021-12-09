@@ -2,6 +2,22 @@ public class OrderedPair<T,S>{
     private T domainVal;
     private S rangeVal;
 
+    public T getDomainVal() {
+        return domainVal;
+    }
+
+    public void setDomainVal(T domainVal) {
+        this.domainVal = domainVal;
+    }
+
+    public S getRangeVal() {
+        return rangeVal;
+    }
+
+    public void setRangeVal(S rangeVal) {
+        this.rangeVal = rangeVal;
+    }
+
     public OrderedPair(T _domainVal, S _rangeVal) {
         domainVal = _domainVal;
         rangeVal = _rangeVal;
