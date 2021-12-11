@@ -17,11 +17,11 @@ The set class is an abstract class that contains a variety of basic methods that
  `powerSet()` | Set | Gives a set containing all the subsets of the original set.
  `contains(T e)` | boolean | Tests whether the set contains the argument.
  `isSubset(Set a)` | boolean | Tests whether or not the argument is a subset of the receiver set.
- `equals(Set a)` | boolean | Tests if the sets contain exclusively all the same elements.
- `existsElementSatisfying(Condition c)` | boolean | Tests if there is an element in the set that satisfies the condition.
- `allElementsSatisfy(Condition c)` | boolean | Tests if all elements in the set satisfy the condition.
+ `equals(Object a)` | boolean | Tests if the sets contain exclusively all the same elements.
+ `existsElementSatisfying((T)->boolean c)` | boolean | Tests if there is an element in the set that satisfies the condition.
+ `allElementsSatisfy((T)->boolean c)` | boolean | Tests if all elements in the set satisfy the condition.
  `toArray()` | T[] | Gives an array with all the elements of the set.
- `isDiscrete[]` | boolean | Tests if the set is discrete or not.
+ `isDiscrete()` | boolean | Tests if the set is discrete or not.
  
  ### The DiscreteSet Class
  
@@ -39,6 +39,7 @@ The set class is an abstract class that contains a variety of basic methods that
  -------|-------------|-------------
  `add(T e)` | void | Adds the argument to the set.
  `remove(T e)` | void | Removes the element from the set.
+ `toString()` | String | Returns a String formatted as a list of the elements of the set, seperated by commas, inside brackets
  
  ### The Complement Class
  
@@ -48,10 +49,34 @@ The set class is an abstract class that contains a variety of basic methods that
  ------------|------------
  `Complement(Set a)` | Creates a complement with all the elements not in the argument.
  
+ This class also inherits a `toString` method from Object:
+ 
+ Method | Return Type | Description
+ -------|-------------|------------
+ `toString()` | String | Returns a String formatted "complement: " followed by the string representing the complemented set.
+ 
  This class has no additional methods beyond what it inherits from Set and Object.
  
  ## OrderedPair
  
- OrderedPair is a class that contains an ordered pair, or two ordered values. These two values are the `domainValue` and the `rangeValue`. This class exists to support the productWith() method. 
+ OrderedPair is a class that contains an ordered pair, or two ordered values. These two values are the `domainVal` of type T and the `rangeVal` of type S, which are the only two instance variables. This class exists to support the productWith() method. THis product has the following constructor:
  
+ Constructor | Description
+ ------------|------------
+ `OrderedPair(T _domainVal,S _rangeVal)` | sets the domain and range values to the arguments
+ 
+ This product has/overrides the following methods:
+ 
+ Method | Return Type | Description
+ -------|-------------|------------
+ `getDomainVal()` | T | returns `domainVal`
+ `getRangeVal()` | S | returns `rangeVal`
+ `setDomainVal(T e)` | void | sets `domainVal` to the argument
+ `setRangeVal(S e)` | void | sets `rangeVal` to the argument
+ `toString()` | String | returns a string of the format "("+domainVal+","+"rangeVal"+")"
+ `equals(Object ob)` | boolean | returns whether the argument object is an OrderedPair with identical domain and range values
+ 
+ ## Condition
+ 
+ Condition is an interface used to support the use of condition lambdas on elements of type T in the Set class. It has one method, `satisfiedBy(T element)`, which returns a boolean.
  
