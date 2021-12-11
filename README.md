@@ -1,6 +1,6 @@
 # set-theory
 
-A set theory library for Java, including the ability to create sets (collection-like structures with no duplicates) of any type. These sets support a wide variety of widely-used set operations including union, intersection, complement, difference, cartesian product, and subset detection. Additionally, sets support elementhood test and discrete/uncountable cardinalities. Discrete sets can also be converted into arrays.
+A set theory library for Java, including the ability to create sets (collection-like structures with no duplicates) of any type. These sets support a wide variety of widely-used set operations including union, intersection, complement, difference, Cartesian product, and subset detection. Additionally, sets support elementhood tests and discrete/uncountable cardinalities. Discrete sets can also be converted into arrays.
 
 ## The Set Class
 
@@ -12,7 +12,7 @@ The set class is an abstract class that contains a variety of basic methods that
  `unionWith(Set a)` | Set | Gives a set with all the elements of either of the two sets.
  `intersectionWith(Set a)` | Set | Gives a set containing all the elements that are in both of the two sets.
  `differenceWith(Set a)` | Set | Gives a set containing all the elements of the receiver that are not in the argument.
- `productWith(Set a)` | Set | Gives the cartesian product of the two sets, that is, a set containing ordered pairs where the domain of the points is the receiver, and the range of them is the argument.
+ `productWith(Set a)` | Set | Gives the Cartesian product of the two sets, that is, a set containing ordered pairs where the domain of the points is the receiver, and the range of them is the argument.
  `complement()` | Set | Gives a set containing exclusively all the elements not in the original set.
  `powerSet()` | Set | Gives a set containing all the subsets of the original set.
  `contains(T e)` | boolean | Tests whether the set contains the argument.
