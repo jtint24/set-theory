@@ -25,13 +25,13 @@ The set class is an abstract class that contains a variety of basic methods that
  
  ### The DiscreteSet Class
  
- This class inherits Set and represents sets containing discrete elements. In addition to all the methods listed above, DiscreteClass also has the following constructors for a DiscreteSet containing elements of type T:
+ This class inherits Set and represents sets containing discrete elements. In addition to all the methods listed above, DiscreteSet also has the following constructors for a DiscreteSet containing elements of type T:
  
  Constructor | Description
   -------|--
- `DiscreteSet(T... elements)` | Makes DiscreteSet containing all the arguments.
- `DiscreteSet()` | Makes empty DiscreteSet.
- `DiscreteSet(ArrayList<T> elements)` | Makes DiscreteSet containing all the elements of the argument.
+ `DiscreteSet(T... elements)` | Makes a DiscreteSet containing all the arguments.
+ `DiscreteSet()` | Makes an empty DiscreteSet.
+ `DiscreteSet(ArrayList<T> elements)` | Makes a DiscreteSet containing all the elements of the argument.
  
  This class also has two additional methods:
  
@@ -59,7 +59,7 @@ The set class is an abstract class that contains a variety of basic methods that
  
  ## OrderedPair
  
- OrderedPair is a class that contains an ordered pair, or two ordered values. These two values are the `domainVal` of type T and the `rangeVal` of type S, which are the only two instance variables. This class exists to support the productWith() method. THis product has the following constructor:
+ OrderedPair is a class that contains an ordered pair, or two ordered values. These two values are the `domainVal` of type T and the `rangeVal` of type S, which are the only two instance variables. This class exists to support the productWith() method. This product has the following constructor:
  
  Constructor | Description
  ------------|------------
